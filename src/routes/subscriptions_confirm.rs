@@ -1,4 +1,3 @@
-use crate::telemetry::get_subscriber;
 use actix_web::{web, HttpResponse};
 use sqlx::PgPool;
 use uuid::Uuid;

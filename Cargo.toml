@@ -24,6 +24,8 @@ tokio = { version = "1", features = ["rt", "macros"] }
 wiremock = "0.5"
 
 [dependencies]
+anyhow = "1"
+thiserror = "1"
 rand = { version = "0.8", features=["std_rng"] }
 reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
 validator = "0.14"
