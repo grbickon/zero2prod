@@ -24,6 +24,8 @@ tokio = { version = "1", features = ["rt", "macros"] }
 wiremock = "0.5"
 
 [dependencies]
+argon2 = {version = "0.3", features = ["std"]}
+base64 = "0.13"
 anyhow = "1"
 thiserror = "1"
 rand = { version = "0.8", features=["std_rng"] }
