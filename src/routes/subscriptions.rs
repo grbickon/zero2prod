@@ -1,6 +1,5 @@
 use crate::domain::{NewSubscriber, SubscriberEmail, SubscriberName};
 use crate::email_client::EmailClient;
-use crate::routes::SubscribeError::UnexpectedError;
 use crate::startup::ApplicationBaseUrl;
 use actix_web::http::StatusCode;
 use actix_web::{web, HttpResponse, ResponseError};
@@ -62,7 +61,7 @@ pub async fn send_confirmation_email(
         confirmation_link
     );
     email_client
-        .send_email(new_subscriber.email, "Welcome!", &html_body, &plain_body)
+        .send_email(&new_subscriber.email, "Welcome!", &html_body, &plain_body)
         .await
 }
 #[tracing::instrument(
@@ -111,7 +110,7 @@ pub async fn subscribe(
     Ok(HttpResponse::Ok().finish())
 }
 
-fn error_chain_fmt(
+pub fn error_chain_fmt(
     e: &impl std::error::Error,
     f: &mut std::fmt::Formatter<'_>,
 ) -> std::fmt::Result {
@@ -131,18 +130,6 @@ pub enum SubscribeError {
     #[error(transparent)]
     UnexpectedError(#[from] anyhow::Error),
 }
-/*
-    #[error("")]
-    PoolError(#[source] sqlx::Error),
-    #[error("Failed to insert new subscriber in the database.")]
-    InsertSubscriberError(#[source] sqlx::Error),
-    #[error("Failed to commit SQL transaction to store a new subscriber")]
-    TransactionCommitError(#[source] sqlx::Error),
-    #[error("Failed to store the confirmation token for new subscriber")]
-    StoreTokenError(#[from] StoreTokenError),
-    #[error("Failed to send a confirmation email")]
-    SendEmailError(#[from] reqwest::Error),
-}*/
 
 impl std::fmt::Debug for SubscribeError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
