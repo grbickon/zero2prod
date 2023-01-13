@@ -1,4 +1,5 @@
 use crate::domain::SubscriberEmail;
+use crate::startup::HmacSecret;
 use secrecy::{ExposeSecret, Secret};
 use serde;
 use serde_aux::field_attributes::deserialize_number_from_string;
@@ -47,6 +48,7 @@ pub struct ApplicationSettings {
     pub port: u16,
     pub host: String,
     pub base_url: String,
+    pub hmac_secret: Secret<String>,
 }
 
 impl DatabaseSettings {

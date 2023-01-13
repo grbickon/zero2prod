@@ -24,12 +24,17 @@ tokio = { version = "1", features = ["rt", "macros"] }
 wiremock = "0.5"
 
 [dependencies]
+actix-web-flash-messages = { version = "0.3", features = ["cookies"] }
+hex = "0.4"
+hmac = { version = "0.12", features = ['std'] }
+sha2 = "0.10"
+htmlescape = "0.3"
+urlencoding = "2"
 argon2 = {version = "0.3", features = ["std"]}
 base64 = "0.13"
 anyhow = "1"
 thiserror = "1"
 rand = { version = "0.8", features=["std_rng"] }
-reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
 validator = "0.14"
 claim = "0.5"
 unicode-segmentation = "1"
@@ -60,3 +65,8 @@ features = [
     "migrate",
     "offline"
 ]
+
+[dependencies.reqwest]
+version = "0.11"
+default-features = false
+features = ["json", "rustls-tls", "cookies"]
